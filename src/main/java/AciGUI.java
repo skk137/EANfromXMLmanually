@@ -47,7 +47,18 @@ public class AciGUI extends JFrame {
 
     private void openTxtFile() {
         try {
-            File file = new File("aci.txt");
+            File file = new File(System.getProperty("user.dir"), "aci.txt");
+
+            // Αν δεν υπάρχει, το δημιουργούμε
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                    if (logArea != null) logArea.append("Δημιουργήθηκε νέο αρχείο aci.txt\n");
+                    else System.out.println("Δημιουργήθηκε νέο αρχείο aci.txt");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             if (!file.exists()) {
                 JOptionPane.showMessageDialog(this, "Το αρχείο aci.txt δεν βρέθηκε!");
                 return;
@@ -64,6 +75,7 @@ public class AciGUI extends JFrame {
                 logArea.append("Ξεκινάει το matching...\n");
                 AciScraper.main(null);
                 logArea.append("✅ Ολοκληρώθηκε! Το aci.txt ενημερώθηκε. Credits skk137. \n");
+                logArea.append(" Για να δείτε το αρχέιο ξαναπατήστε, επεξεργασία αρχείου! Credits skk137. \n");
             } catch (Exception ex) {
                 logArea.append("⚠️ Σφάλμα: " + ex.getMessage() + "\n");
             }

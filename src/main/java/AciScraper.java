@@ -9,7 +9,19 @@ import java.util.regex.Pattern;
 public class AciScraper {
     public static void main(String[] args) throws Exception {
 
-        File file = new File("aci.txt");
+
+        File file = new File(System.getProperty("user.dir"), "aci.txt");
+
+        // Αν δεν υπάρχει, το δημιουργούμε
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                if (AciGUI.logArea != null) AciGUI.logArea.append("Δημιουργήθηκε νέο αρχείο aci.txt\n");
+                else System.out.println("Δημιουργήθηκε νέο αρχείο aci.txt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         List<String> codes = new ArrayList<>();

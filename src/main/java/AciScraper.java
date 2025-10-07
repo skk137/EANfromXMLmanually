@@ -43,7 +43,12 @@ public class AciScraper {
             }
 
             results.add(code + ";" + ean); //ωστε να σπάσει μετα σε excel transformation. (Update να γίνει apply εκει απευθείας)
-            System.out.println(code + " -> " + ean);
+            if (AciGUI.logArea != null) {
+                AciGUI.logArea.append(code + " -> " + ean + "\n");
+            } else {
+                System.out.println(code + " -> " + ean);
+            }
+
         }
 
         //Πατάμε(γράφουμε) πάνω στο ίδιο αρχείο

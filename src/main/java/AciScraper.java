@@ -1,6 +1,5 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +29,12 @@ public class AciScraper {
             String searchUrl = "https://www.acihellas.gr/search?adv=false&cid=0&q=" + code + "&sid=true&isc=true";
             String ean = "NOT FOUND";
             try {
-                Document doc = Jsoup.connect(searchUrl)
+                Document doc = Jsoup.connect(searchUrl) // Τραβάει ολο το κείμενο απο την σελ. και το περνάει στο doc
                         .userAgent("Mozilla/5.0")
                         .timeout(15000)
                         .get();
 
-                Matcher m = eanPattern.matcher(doc.text());
+                Matcher m = eanPattern.matcher(doc.text()); // ΔΗΜΙΟΥΡΓΕΊ Matcher, κάνοντας χρήση το txt
                 if (m.find()) {
                     ean = m.group(1);
                 }
@@ -47,7 +46,7 @@ public class AciScraper {
             System.out.println(code + " -> " + ean);
         }
 
-        //Πατάμε πάνω στο ίδιο αρχείο
+        //Πατάμε(γράφουμε) πάνω στο ίδιο αρχείο
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
         for (String res : results) {
             bw.write(res);
@@ -55,7 +54,7 @@ public class AciScraper {
         }
         bw.close();
 
-        System.out.println("Ολοκληρώθηκε! Το aci.txt ενημερώθηκε με barcodes. skk137");
+        System.out.println("Ολοκληρώθηκε! Το aci.txt ενημερώθηκε με barcodes. Credits skk137");
 
     }
 

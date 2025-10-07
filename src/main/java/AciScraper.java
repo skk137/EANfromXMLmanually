@@ -26,7 +26,7 @@ public class AciScraper {
 
         List<String> results = new ArrayList<>();
         for (String code : codes){
-            String searchUrl = "https://www.acihellas.gr/search?adv=false&cid=0&q=" + code + "&sid=true&isc=true";
+            String searchUrl = "https://www.acihellas.gr/search?adv=false&cid=0&q=" + code + "&sid=true&isc=true";   //debug
             String ean = "NOT FOUND";
             try {
                 Document doc = Jsoup.connect(searchUrl) // Τραβάει ολο το κείμενο απο την σελ. και το περνάει στο doc
